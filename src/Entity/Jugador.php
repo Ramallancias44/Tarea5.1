@@ -5,8 +5,10 @@ namespace App\Entity;
 use App\Repository\JugadorRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use DateTimeImmutable;
 
 #[ORM\Entity(repositoryClass: JugadorRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Jugador
 {
     #[ORM\Id]
@@ -75,9 +77,9 @@ class Jugador
         return $this->fechaCreacion;
     }
 
-    public function setFechaCreacion(?\DateTimeInterface $fechaCreacion): static
+    public function setFechaCreacion(): self
     {
-        $this->fechaCreacion = $fechaCreacion;
+        $this->fechaCreacion = new DateTimeImmutable('now');
 
         return $this;
     }
@@ -87,9 +89,9 @@ class Jugador
         return $this->fechaModificacion;
     }
 
-    public function setFechaModificacion(?\DateTimeInterface $fechaModificacion): static
+    public function setFechaModificacion(): self
     {
-        $this->fechaModificacion = $fechaModificacion;
+        $this->fechaModificacion = new DateTimeImmutable('now');
 
         return $this;
     }
