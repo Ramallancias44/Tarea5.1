@@ -6,6 +6,7 @@ use App\Repository\JugadorRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use DateTimeImmutable;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: JugadorRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -16,13 +17,25 @@ class Jugador
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 20)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 20)]
     private ?string $nombre = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
+        #[Assert\GreaterThan(
+        value: 0,
+        message: 'El número debe ser mayor que 0'
+    )]
     private ?float $altura = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
+        #[Assert\GreaterThan(
+        value: 0,
+        message: 'El número debe ser mayor que 0'
+    )]
     private ?int $dorsal = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
@@ -76,7 +89,7 @@ class Jugador
     {
         return $this->crear;
     }
-#[ORM\PrePersist]
+    #[ORM\PrePersist]
 
     public function setCrear(): self
     {
@@ -89,8 +102,8 @@ class Jugador
     {
         return $this->actualizar;
     }
-    #[#ORM\PrePersist]
-    #[#ORM\PreUpdate]
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
     public function setActualizar(): self
     {
         $this->actualizar = new DateTimeImmutable('now');

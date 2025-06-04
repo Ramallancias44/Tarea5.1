@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Jugador;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
+
 
 /**
  * @extends ServiceEntityRepository<Jugador>
@@ -16,7 +18,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class JugadorRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, private EntityManagerInterface $em)
     {
         parent::__construct($registry, Jugador::class);
     }
@@ -45,4 +47,11 @@ class JugadorRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+public function save(Jugador $jugador, bool $flush = true): void
+{
+    $this->em->persist($jugador);
+    if ($flush) {
+        $this->em->flush();
+    }
+}
 }
