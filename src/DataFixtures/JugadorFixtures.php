@@ -2,9 +2,9 @@
 
 namespace App\DataFixtures;
 
+use App\Factory\JugadorFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use App\Factory\JugadorFactory;
 
 class JugadorFixtures extends Fixture
 {

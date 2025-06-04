@@ -51,9 +51,10 @@ final class JugadorFactory extends PersistentProxyObjectFactory{
     protected function defaults(): array|callable
     {
         return [
+            'nombre' => self::faker()->text(20),
             'altura' => self::faker()->randomFloat(),
             'dorsal' => self::faker()->randomNumber(),
-            'nombre' => self::faker()->text(255),
+            
         ];
     }
 

@@ -25,11 +25,11 @@ class Jugador
     #[ORM\Column]
     private ?int $dorsal = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $fechaCreacion = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $crear = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $fechaModificacion = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $actualizar = null;
 
     public function getId(): ?int
     {
@@ -72,26 +72,28 @@ class Jugador
         return $this;
     }
 
-    public function getFechaCreacion(): ?\DateTimeInterface
+    public function getCrear(): ?\DateTimeInterface
     {
-        return $this->fechaCreacion;
+        return $this->crear;
     }
+#[ORM\PrePersist]
 
-    public function setFechaCreacion(): self
+    public function setCrear(): self
     {
-        $this->fechaCreacion = new DateTimeImmutable('now');
+        $this->crear = new DateTimeImmutable('now');
 
         return $this;
     }
 
-    public function getFechaModificacion(): ?\DateTimeInterface
+    public function getActualizar(): ?\DateTimeInterface
     {
-        return $this->fechaModificacion;
+        return $this->actualizar;
     }
-
-    public function setFechaModificacion(): self
+    #[#ORM\PrePersist]
+    #[#ORM\PreUpdate]
+    public function setActualizar(): self
     {
-        $this->fechaModificacion = new DateTimeImmutable('now');
+        $this->actualizar = new DateTimeImmutable('now');
 
         return $this;
     }
