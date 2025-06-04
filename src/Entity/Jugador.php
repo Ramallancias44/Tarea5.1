@@ -24,18 +24,16 @@ class Jugador
 
     #[ORM\Column]
     #[Assert\NotBlank]
-        #[Assert\GreaterThan(
-        value: 0,
-        message: 'El número debe ser mayor que 0'
-    )]
+    #[Assert\Range(min: 0.01, max: 999.99)]
     private ?float $altura = null;
 
     #[ORM\Column]
     #[Assert\NotBlank]
-        #[Assert\GreaterThan(
+    #[Assert\GreaterThan(
         value: 0,
         message: 'El número debe ser mayor que 0'
     )]
+    
     private ?int $dorsal = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]

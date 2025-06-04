@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 #[Route("/api", "api_")]
 class JugadorController extends AbstractController
@@ -60,7 +61,7 @@ class JugadorController extends AbstractController
         }
     }
     #[Route("/jugador/{id}", "delete_todo", methods: ["DELETE"])]
-    public function deleteTodo(Jugador $jugador, JugadorRepository $jugadorRepository)
+    public function deleteJugador(Jugador $jugador, JugadorRepository $jugadorRepository)
     {
         $jugadorRepository->remove($jugador, true);
 
@@ -68,7 +69,7 @@ class JugadorController extends AbstractController
     }
 
     #[Route("/jugador/{id}", "update_jugador", methods: ["PATCH", "PUT"])]
-    public function updateJugador(Jugador $jugador, Request $request, JugadorOptionsResolver $jugadorOptionsResolver, ValidatorInterface $validator, EntityManager $em)
+    public function updateJugador(Jugador $jugador, Request $request, JugadorOptionsResolver $jugadorOptionsResolver, ValidatorInterface $validator, EntityManagerInterface $em)
     {
         try {
             $requestBody = json_decode($request->getContent(), true);

@@ -54,4 +54,11 @@ public function save(Jugador $jugador, bool $flush = true): void
         $this->em->flush();
     }
 }
+    public function remove(Jugador $jugador, bool $flush = false): void
+    {
+        $this->em->remove($jugador);
+        if ($flush) {
+            $this->em->flush();
+        }
+    }
 }
