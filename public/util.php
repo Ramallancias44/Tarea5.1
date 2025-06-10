@@ -1,5 +1,5 @@
 <?php
-const URL_BASE = "http://127.0.0.1:8000/api/todos";
+const URL_BASE = "http://127.0.0.1:8000/api/jugador";
 
 function mostrar_json($content){
     echo "<pre>";
